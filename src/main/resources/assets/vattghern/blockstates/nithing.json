@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+	"defaults": {
+    	"model": "vattghern:nithing.obj",
+		"custom": { "flip-v": true },
+		"textures": {
+			"#none": "vattghern:blocks/nithing/chestnut"
+		}
+    },
+    "variants":{
+		"facing": {
+			"north": {"y":270},
+			"south": {"y":90},
+			"east": {"y":0},
+			"west": {"y":180}
+		},
+		"normal":[{}],
+		"inventory":[{}]
+    }
+}

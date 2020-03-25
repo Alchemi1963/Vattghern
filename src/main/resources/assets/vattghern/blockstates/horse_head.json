@@ -1,0 +1,97 @@
+{
+    "forge_marker": 1,
+	"defaults":{
+		"model": "vattghern:horse_head"
+	},
+    "variants":{
+		"horsetype": {
+			"donkey": {"model": "vattghern:horse_head_mule",
+			"textures": {
+				"none": "entity/horse/donkey",
+				"particle": "entity/horse/donkey"
+			}},
+			"horse_black": {"textures": {
+				"none": "entity/horse/horse_black",
+				"particle": "entity/horse/horse_black"
+			}},
+			"horse_brown": {"textures": {
+				"none": "entity/horse/horse_brown",
+				"particle": "entity/horse/horse_brown"
+			}},
+			"horse_chestnut": {"textures": {
+				"none": "entity/horse/horse_chestnut",
+				"particle": "entity/horse/horse_chestnut"
+			}},
+			"horse_creamy": {"textures": {
+				"none": "entity/horse/horse_creamy",
+				"particle": "entity/horse/horse_creamy"
+			}},
+			"horse_darkbrown": {"textures": {
+				"none": "entity/horse/horse_darkbrown",
+				"particle": "entity/horse/horse_darkbrown"
+			}},
+			"horse_gray": {"textures": {
+				"none": "entity/horse/horse_gray",
+				"particle": "entity/horse/horse_gray"
+			}},
+			"horse_skeleton": {"textures": {
+				"none": "entity/horse/horse_skeleton",
+				"particle": "entity/horse/horse_skeleton"
+			}},
+			"horse_white": {"textures": {
+				"none": "entity/horse/horse_white",
+				"particle": "entity/horse/horse_white"
+			}},
+			"horse_zombie": {"textures": {
+				"none": "entity/horse/horse_zombie",
+				"particle": "entity/horse/horse_zombie"
+			}},
+			"mule": {"model": "vattghern:horse_head_mule",
+			"textures": {
+				"none": "entity/horse/mule",
+				"particle": "entity/horse/mule"
+			}}
+		},
+		"facing": {
+			"north": { "y": 0 },
+			"south": { "y": 180},
+			"east": { "y": 270},
+			"west": { "y": 90}
+		},
+		"inventory0":[{"model": "vattghern:horse_head_mule",
+		"textures": {
+				"none": "entity/horse/donkey"
+			}}],
+		"inventory1":[{"textures": {
+				"none": "entity/horse/horse_black"
+			}}],
+		"inventory2":[{"textures": {
+				"none": "entity/horse/horse_brown"
+			}}],
+		"inventory3":[{"textures": {
+				"none": "entity/horse/horse_chestnut"
+			}}],
+		"inventory4":[{"textures": {
+				"none": "entity/horse/horse_creamy"
+			}}],
+		"inventory5":[{"textures": {
+				"none": "entity/horse/horse_darkbrown"
+			}}],
+		"inventory6":[{"textures": {
+				"none": "entity/horse/horse_gray"
+			}}],
+		"inventory7":[{"textures": {
+				"none": "entity/horse/horse_skeleton"
+			}}],
+		"inventory8":[{"textures": {
+				"none": "entity/horse/horse_white"
+			}}],
+		"inventory9":[{"textures": {
+				"none": "entity/horse/horse_zombie"
+			}}],
+		"inventory10":[{"model": "vattghern:horse_head_mule",
+		"textures": {
+				"none": "entity/horse/mule"
+			}}]
+    }
+}

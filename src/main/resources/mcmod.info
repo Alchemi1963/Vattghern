@@ -1,0 +1,16 @@
+[
+{
+  "modid": "vattghern",
+  "name": "Vatt'ghern",
+  "description": "A Witcher inspired mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Alchemi"],
+  "credits": "The Forge and FML guys, for creating Forge.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
