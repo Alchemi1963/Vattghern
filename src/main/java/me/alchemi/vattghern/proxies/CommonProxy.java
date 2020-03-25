@@ -12,6 +12,7 @@ import me.alchemi.vattghern.objects.items.ItemMedallion;
 import me.alchemi.vattghern.objects.recipes.RecipeNithing;
 import me.alchemi.vattghern.objects.recipes.RecipeNithing2;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.objects.tileentities.TileEntityPhantom;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -37,7 +38,7 @@ public class CommonProxy {
 		e.getRegistry().registerAll(new BlockNithing(), new BlockHorseHead(), new BlockPhantom(BlockNithing.AABB, EnumFacing.UP));
 		
 		GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
-//		GameRegistry.registerTileEntity(TileEntityHorseHead.class, new ResourceLocation(Vattghern.MOD_ID, "horse_head"));
+		GameRegistry.registerTileEntity(TileEntityPhantom.class, new ResourceLocation(Vattghern.MOD_ID, "phantomblock"));
 	}
 	
 	@SubscribeEvent
