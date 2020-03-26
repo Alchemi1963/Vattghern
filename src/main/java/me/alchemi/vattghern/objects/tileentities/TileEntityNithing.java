@@ -7,56 +7,47 @@ import java.util.UUID;
 import com.google.common.base.Predicate;
 
 import me.alchemi.vattghern.Vattghern;
-import me.alchemi.vattghern.objects.blocks.BlockPhantom;
-import me.alchemi.vattghern.objects.gui.NithingGui;
+import me.alchemi.vattghern.objects.Utils;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
-public class TileEntityNithing extends TileEntity implements ITickable {
+@EventBusSubscriber(modid = Vattghern.MOD_ID)
+public class TileEntityNithing extends TileEntity implements IMultiBlockProvider {
 	
 	private UUID ownerUUID;
 	private String ownerName;
 	private String victim;
-	private ItemStack fenceItem;
-	private ItemStack headItem;
 	private EntityLivingBase victimEntity;
 	
 	private int ticks = 0;
 	
 	private boolean destroy = false;
 	
-	public TileEntityNithing() {
-		MinecraftForge.EVENT_BUS.register(this);	
-	}
-	
-	public void setFenceItem(ItemStack fenceItem) {
-		this.fenceItem = fenceItem;
-	}
-	
-	public void setHeadItem(ItemStack headItem) {
-		this.headItem = headItem;
+	public TileEntityNithing() {	
 	}
 	
 	public void setOwner(EntityPlayer owner) {
 		this.ownerUUID = owner.getUniqueID();
 		this.ownerName = owner.getName();
+		Utils.sendMessageToPlayer(owner, "nithing.setvictim.name");
 	}
 	
 	public EntityPlayer getOwner() {
-		return world.getMinecraftServer().getPlayerList().getPlayerByUUID(ownerUUID);
+		return world != null ? world.getMinecraftServer().getPlayerList().getPlayerByUUID(ownerUUID) : null;
 	}
 	
 	public UUID getOwnerUUID() {
@@ -65,14 +56,6 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 	
 	public String getOwnerName() {
 		return ownerName;
-	}
-	
-	public ItemStack getFenceItem() {
-		return fenceItem;
-	}
-	
-	public ItemStack getHeadItem() {
-		return headItem;
 	}
 	
 	public void setVictim(String victim) {
@@ -104,8 +87,6 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 		ownerUUID = nbt.getUniqueId("ownerUUID");
 		ownerName = nbt.getString("ownerName");
 		victim = nbt.getString("victim");
-		fenceItem = new ItemStack(nbt.getCompoundTag("fence"));
-		headItem = new ItemStack(nbt.getCompoundTag("head"));
 		
 	}
 
@@ -114,22 +95,18 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 		compound = super.writeToNBT(compound);
 		if (ownerUUID != null) compound.setUniqueId("owner", ownerUUID);
 		if (victim != null) compound.setString("victim", victim);
-		if (fenceItem != null) compound.setTag("fence", fenceItem.writeToNBT(new NBTTagCompound()));
-		if (headItem != null) compound.setTag("head", headItem.writeToNBT(new NBTTagCompound()));
 		return compound;
 	}
 	
 	@Override
 	public void update() {
-		//check if phantomblock still exists
-		if (!(world.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockPhantom)) {
-			world.destroyBlock(pos, true);
-			return;
-		}
-		
 		if (destroy) {
 			ticks ++;
-			if (ticks >= 5) getWorld().destroyBlock(getPos(), true);
+			if (ticks >= 5) {
+				world.destroyBlock(pos, true);
+				world.destroyBlock(pos.add(0, -1, 0), true);
+				world.destroyBlock(pos.add(0, -2, 0), true);
+			}
 			return;
 		}
 		if (victimEntity == null) {
@@ -141,6 +118,23 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 		} else if (!victimEntity.isEntityAlive()) {
 			victimEntity = null;
 			ticks = 0;
+			return;
+		}
+		
+		if (!checkMultiBlockValid()) {
+			victimEntity.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 2, 0));
+			victimEntity.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 20 * 120, 3));
+			victimEntity.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 20 * 120, 0));
+			victimEntity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 20 * 120, 1));
+			
+			getOwner().addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 2, 0));
+			getOwner().addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 20 * 120, 3));
+			getOwner().addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 20 * 120, 0));
+			getOwner().addPotionEffect(new PotionEffect(MobEffects.HUNGER, 20 * 120, 1));
+			
+			world.setBlockToAir(pos);
+			world.setBlockToAir(pos.add(0, -1, 0));
+			world.setBlockToAir(pos.add(0, -2, 0));
 			return;
 		}
 		
@@ -158,10 +152,31 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 	}
 	
 	@SubscribeEvent
-	public void onOwnerDeath(LivingDeathEvent e) {
-		if (e.getEntityLiving().getUniqueID().equals(ownerUUID)) {
-			if (hasWorld()) {
-				Vattghern.LOGGER.debug(getWorld().destroyBlock(pos, false));
+	public static void onBlockBreak(LivingDestroyBlockEvent e) {
+		
+		if (e.getEntity().getEntityWorld().getTileEntity(e.getPos()) instanceof TileEntityNithing) {
+			TileEntityNithing te = (TileEntityNithing) e.getEntity().getEntityWorld().getTileEntity(e.getPos());
+			if (!e.getEntity().getUniqueID().equals(te.getOwnerUUID())) {
+				e.setCanceled(true);
+			}
+		
+		} else if (OreDictionary.getOres("fenceWood", false).contains(new ItemStack(e.getState().getBlock()))
+				&& e.getEntity().getEntityWorld().getTileEntity(e.getPos().add(0, 1, 0)) instanceof TileEntityNithing) {
+			TileEntityNithing te = (TileEntityNithing) e.getEntity().getEntityWorld().getTileEntity(e.getPos().add(0, 1, 0));
+			if (!e.getEntity().getUniqueID().equals(te.getOwnerUUID())) {
+				e.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerBlockBreak(BlockEvent.BreakEvent e) {
+		if (OreDictionary.getOres("fenceWood", false).contains(new ItemStack(e.getState().getBlock()))
+				&& e.getWorld().getTileEntity(e.getPos().add(0, 1, 0)) instanceof TileEntityNithing) {
+			
+			TileEntityNithing te = (TileEntityNithing) e.getWorld().getTileEntity(e.getPos().add(0, 1, 0));
+			if (!e.getPlayer().getUniqueID().equals(te.getOwnerUUID())) {
+				e.setCanceled(true);
 			}
 		}
 	}
@@ -190,5 +205,13 @@ public class TileEntityNithing extends TileEntity implements ITickable {
 	@Override
 	public boolean hasFastRenderer() {
 		return false;
+	}
+
+	@Override
+	public boolean checkMultiBlockValid() {
+		IBlockState state1 = world.getBlockState(pos.add(0, -1, 0));
+		IBlockState state2 = world.getBlockState(pos.add(0, -2, 0));
+		return Utils.containsOreDict(new ItemStack(state1.getBlock(), 1, state1.getBlock().getMetaFromState(state1)), "fenceWood")
+				&& Utils.containsOreDict(new ItemStack(state2.getBlock(), 1, state2.getBlock().getMetaFromState(state2)), "fenceWood");
 	}
 }

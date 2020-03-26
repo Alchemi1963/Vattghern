@@ -4,6 +4,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import me.alchemi.vattghern.proxies.CommonProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -12,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.SidedProxy;
 
-@Mod(modid = Vattghern.MOD_ID, name = Vattghern.NAME, version = Vattghern.VERSION)
+@Mod(modid = Vattghern.MOD_ID, name = Vattghern.NAME, version = Vattghern.VERSION, dependencies = "after:headcrumbs")
 public class Vattghern {
 	
 	public static final String MOD_ID = "vattghern";

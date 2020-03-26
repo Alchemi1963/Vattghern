@@ -1,25 +1,8 @@
 package me.alchemi.vattghern.objects.items;
 
-import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.holders.BlockHolder;
-import me.alchemi.vattghern.objects.EnumHorseType;
 import me.alchemi.vattghern.objects.items.base.ItemBlockBasicMeta;
-import me.alchemi.vattghern.objects.tileentities.TileEntityHorseHead;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemHorseHead extends ItemBlockBasicMeta {
 

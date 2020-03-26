@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy{
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
 		
-		OBJLoader.INSTANCE.addDomain(Vattghern.MOD_ID);
+//		OBJLoader.INSTANCE.addDomain(Vattghern.MOD_ID);
 	}
 	
 	@SubscribeEvent

@@ -1,41 +1,36 @@
 package me.alchemi.vattghern.objects.blocks;
 
-import java.util.Random;
-
-import me.alchemi.vattghern.holders.ItemHolder;
 import me.alchemi.vattghern.objects.EnumHorseType;
 import me.alchemi.vattghern.objects.Utils;
 import me.alchemi.vattghern.objects.blocks.base.BlockBasicMeta;
-import me.alchemi.vattghern.objects.models.blocks.ModelHorseHead;
-import net.minecraft.block.BlockGlass;
-import net.minecraft.block.BlockSkull;
+import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.model.ModelHorse;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockHorseHead extends BlockBasicMeta {
 
 	public static final PropertyEnum<EnumHorseType> HORSETYPE = PropertyEnum.create("horsetype", EnumHorseType.class);
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyBool ISNITHING = PropertyBool.create("is_nithing");
 	
 	protected static final AxisAlignedBB NORTH_AABB = Utils.createAABB(6, 0, 0, 10, 14, 12);
 	protected static final AxisAlignedBB SOUTH_AABB = Utils.createAABB(6, 0, 4, 10, 14, 16);
@@ -44,7 +39,9 @@ public class BlockHorseHead extends BlockBasicMeta {
 	
 	public BlockHorseHead() {
 		super(Material.CIRCUITS, "horse_head", 11);
-		setDefaultState(getDefaultState().withProperty(HORSETYPE, EnumHorseType.HORSE_ZOMBIE).withProperty(FACING, EnumFacing.NORTH));
+		setDefaultState(getDefaultState().withProperty(HORSETYPE, EnumHorseType.HORSE_ZOMBIE)
+				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(ISNITHING, false));
 		setHardness(0.5F);
 		setSoundType(SoundType.STONE);
 	}
@@ -104,13 +101,33 @@ public class BlockHorseHead extends BlockBasicMeta {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, HORSETYPE, FACING);
+		return new BlockStateContainer(this, new IProperty[] {FACING, HORSETYPE, ISNITHING});
 	}
 	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
+		
+		if (placer instanceof EntityPlayer) {
+			IBlockState state1 = worldIn.getBlockState(pos.add(0, -1, 0));
+			IBlockState state2 = worldIn.getBlockState(pos.add(0, -2, 0));
+			if (Utils.containsOreDict(new ItemStack(state1.getBlock(), 1, state1.getBlock().getMetaFromState(state1)), "fenceWood")
+				&& Utils.containsOreDict(new ItemStack(state2.getBlock(), 1, state2.getBlock().getMetaFromState(state2)), "fenceWood")) {
+			
+				state = state.withProperty(ISNITHING, true);
+				worldIn.setBlockState(pos, state);
+				
+				TileEntityNithing te = (TileEntityNithing) createTileEntity(worldIn, state);
+				te.setOwner((EntityPlayer) placer);
+				worldIn.setTileEntity(pos, te);
+			}
+		}
+	}
+
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return getStateFromMeta(meta).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 	
 	@Override
@@ -171,6 +188,29 @@ public class BlockHorseHead extends BlockBasicMeta {
 		default:
 			return getDefaultState();
 		}
+	}
+	
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return state.getValue(ISNITHING) ? new TileEntityNithing() : null;
+	}
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return state.getValue(ISNITHING);
+	}
+	
+	@Override
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
+			boolean willHarvest) {
+		
+		if (state.getValue(ISNITHING)) {
+			TileEntityNithing te = (TileEntityNithing) world.getTileEntity(pos);
+			
+			return (player.isCreative() || te.getOwnerUUID() == null || player.getUniqueID().equals(te.getOwnerUUID())) 
+					? super.removedByPlayer(state, world, pos, player, willHarvest) : false;
+		}
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}
 	
 }

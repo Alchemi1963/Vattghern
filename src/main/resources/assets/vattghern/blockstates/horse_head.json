@@ -55,9 +55,13 @@
 		"facing": {
 			"north": { "y": 0 },
 			"south": { "y": 180},
-			"east": { "y": 270},
-			"west": { "y": 90}
+			"east": { "y": 90},
+			"west": { "y": 270}
 		},
+		"is_nithing":{
+			"true": {},
+			"false": {}
+		},		
 		"inventory0":[{"model": "vattghern:horse_head_mule",
 		"textures": {
 				"none": "entity/horse/donkey"
