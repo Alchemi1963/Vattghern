@@ -24,7 +24,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class TileEntityNithing extends TileEntity implements IMultiBlockProvider {
+public class TileEntityNithing extends TileEntity implements INithingTile {
 	
 	private UUID ownerUUID;
 	private String ownerName;
@@ -39,32 +39,39 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 		MinecraftForge.EVENT_BUS.register(TileEntityNithing.class);
 	}
 	
+	@Override
 	public void setOwner(EntityPlayer owner) {
 		this.ownerUUID = owner.getUniqueID();
 		this.ownerName = owner.getName();
 		Utils.sendMessageToPlayer(owner, "nithing.setvictim.name");
 	}
 	
+	@Override
 	public EntityPlayer getOwner() {
 		return world != null ? world.getMinecraftServer().getPlayerList().getPlayerByUUID(ownerUUID) : null;
 	}
 	
+	@Override
 	public UUID getOwnerUUID() {
 		return ownerUUID;
 	}
 	
+	@Override
 	public String getOwnerName() {
 		return ownerName;
 	}
 	
+	@Override
 	public void setVictim(String victim) {
 		this.victim = victim;
 	}
 	
+	@Override
 	public String getVictim() {
 		return victim;
 	}
 	
+	@Override
 	public EntityLivingBase getVictimInWorld() {
 		List<EntityLivingBase> ents = world.getEntitiesWithinAABB(EntityLivingBase.class, 
 				new AxisAlignedBB(pos.getX() - 100, pos.getY() - 100, pos.getZ() - 100, pos.getX() + 100, pos.getY() + 100, pos.getZ() + 100), 
@@ -195,6 +202,7 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 		}
 	}
 
+	@Override
 	public void destroy() {
 		destroy = true;
 	}

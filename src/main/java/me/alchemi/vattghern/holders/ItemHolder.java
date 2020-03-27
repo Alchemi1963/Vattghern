@@ -1,6 +1,7 @@
 package me.alchemi.vattghern.holders;
 
 import me.alchemi.vattghern.Vattghern;
+import me.alchemi.vattghern.objects.items.ItemCarvingKnife;
 import me.alchemi.vattghern.objects.items.ItemMedallion;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,12 +15,14 @@ public class ItemHolder {
 	
 	
 	//Tools
+	public static final ItemCarvingKnife CARVING_KNIFE = null;
 	
 	//Weapons
 
 	@SideOnly(Side.CLIENT)
 	public static void registerModels() {
 		MEDALLION.initModel();
+		CARVING_KNIFE.initModel();
 	}
 	
 }

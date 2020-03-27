@@ -8,6 +8,7 @@ import com.google.common.base.Predicate;
 
 import ganymedes01.headcrumbs.tileentities.TileEntityBlockSkull;
 import me.alchemi.vattghern.objects.tileentities.IMultiBlockProvider;
+import me.alchemi.vattghern.objects.tileentities.INithingTile;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
 import me.alchemi.vattghern.utils.Utils;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class HeadcrumbsNithingTE extends TileEntityBlockSkull implements IMultiBlockProvider {
+public class HeadcrumbsNithingTE extends TileEntityBlockSkull implements INithingTile {
 
 	private UUID ownerUUID;
 	private String ownerName;
@@ -36,32 +37,39 @@ public class HeadcrumbsNithingTE extends TileEntityBlockSkull implements IMultiB
 	
 	private boolean destroy = false;
 	
+	@Override
 	public void setOwner(EntityPlayer owner) {
 		this.ownerUUID = owner.getUniqueID();
 		this.ownerName = owner.getName();
 		Utils.sendMessageToPlayer(owner, "nithing.setvictim.name");
 	}
 	
+	@Override
 	public EntityPlayer getOwner() {
 		return world != null ? world.getMinecraftServer().getPlayerList().getPlayerByUUID(ownerUUID) : null;
 	}
 	
+	@Override
 	public UUID getOwnerUUID() {
 		return ownerUUID;
 	}
 	
+	@Override
 	public String getOwnerName() {
 		return ownerName;
 	}
 	
+	@Override
 	public void setVictim(String victim) {
 		this.victim = victim;
 	}
 	
+	@Override
 	public String getVictim() {
 		return victim;
 	}
 	
+	@Override
 	public EntityLivingBase getVictimInWorld() {
 		List<EntityLivingBase> ents = world.getEntitiesWithinAABB(EntityLivingBase.class, 
 				new AxisAlignedBB(pos.getX() - 100, pos.getY() - 100, pos.getZ() - 100, pos.getX() + 100, pos.getY() + 100, pos.getZ() + 100), 
@@ -197,6 +205,7 @@ public class HeadcrumbsNithingTE extends TileEntityBlockSkull implements IMultiB
 		}
 	}
 
+	@Override
 	public void destroy() {
 		destroy = true;
 	}

@@ -11,6 +11,7 @@ public class BlockHolder {
 	public static final BlockHorseHead HORSE_HEAD = null;
 	
 	public static void registerModels() {
-		if (!Loader.isModLoaded("headcrumbs")) HORSE_HEAD.initModel();
+//		if (!Loader.isModLoaded("headcrumbs")) 
+		HORSE_HEAD.initModel();
 	}
 }

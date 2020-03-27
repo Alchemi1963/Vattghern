@@ -1,5 +1,6 @@
 package me.alchemi.vattghern.objects.gui;
 
+import me.alchemi.vattghern.objects.tileentities.INithingTile;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,14 +12,13 @@ public class NithingGui extends GuiScreen {
 
 	public static final int WIDTH = 180;
 	public static final int HEIGHT = 152;
-	public static final int ID = 0;
 	
 	private GuiButton buttonClose;
 	private GuiTextField textField;
-	private final TileEntityNithing te;
+	private final INithingTile te;
 	private FontRenderer font;
 	
-	public NithingGui(TileEntityNithing te) {
+	public NithingGui(INithingTile te) {
 		super();
 		this.font = Minecraft.getMinecraft().fontRenderer;
 		this.te = te;

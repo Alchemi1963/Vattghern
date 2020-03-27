@@ -5,6 +5,7 @@ import me.alchemi.vattghern.compat.HeadcrumbsNithingTE;
 import me.alchemi.vattghern.holders.BlockHolder;
 import me.alchemi.vattghern.holders.EntityHolder;
 import me.alchemi.vattghern.objects.blocks.BlockHorseHead;
+import me.alchemi.vattghern.objects.items.ItemCarvingKnife;
 import me.alchemi.vattghern.objects.items.ItemHorseHead;
 import me.alchemi.vattghern.objects.items.ItemMedallion;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
@@ -29,26 +30,21 @@ public class CommonProxy {
 
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> e) {
-		if (!Loader.isModLoaded("headcrumbs")) { 
-			e.getRegistry().register(new BlockHorseHead());
-			GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
-		} else {
-			GameRegistry.registerTileEntity(HeadcrumbsNithingTE.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
-		}
+		e.getRegistry().registerAll(new BlockHorseHead());
+		GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
+		
 	}
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> e) {
 		e.getRegistry().registerAll( 
-				new ItemMedallion());
+				new ItemMedallion(),
+				new ItemHorseHead(),
+				new ItemCarvingKnife());
 		
-		if (!Loader.isModLoaded("headcrumbs")) e.getRegistry().register(new ItemHorseHead());
-		
-		if (!Loader.isModLoaded("headcrumbs")) {
-			for (int i = 0; i < 11; i++) {
-				OreDictionary.registerOre("headHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
-				OreDictionary.registerOre("skullHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
-			}
+		for (int i = 0; i < 11; i++) {
+			OreDictionary.registerOre("headHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
+			OreDictionary.registerOre("skullHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
 		}
 
 	}

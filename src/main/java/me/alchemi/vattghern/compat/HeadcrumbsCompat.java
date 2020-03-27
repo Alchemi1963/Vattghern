@@ -60,9 +60,16 @@ public class HeadcrumbsCompat implements ICompat {
 				@Override
 				public void run() {
 					e.getWorld().setBlockState(e.getPos(), oldState, 7);
-					onHeadPlace(new PlaceEvent(
-					new BlockSnapshot(e.getWorld(), e.getPos().add(0, 1, 0), e.getWorld().getBlockState(e.getPos())),
-					e.getWorld().getBlockState(e.getPos()), e.getEntityPlayer(), e.getHand()));
+					
+				}
+			});
+			
+			new Scheduler(2, new Runnable() {
+				
+				@Override
+				public void run() {
+					onHeadPlace(new PlaceEvent(new BlockSnapshot(e.getWorld(), e.getPos().add(0, 1, 0), oldState),
+							oldState, e.getEntityPlayer(), e.getHand()));
 				}
 			});
 		}
@@ -75,17 +82,23 @@ public class HeadcrumbsCompat implements ICompat {
 			
 			if (e.getWorld().getTileEntity(e.getPos()) != null) {
 				TileEntityBlockSkull te = Utils.getTileEntity(e.getWorld(), e.getPos(), TileEntityBlockSkull.class);
+				
 				if (te != null 
-						&& (te.getSkullModel().contains("horse") || te.getSkullModel().contains("donkey") || te.getSkullModel().contains("mule"))) {
-					IBlockState state1 = e.getWorld().getBlockState(e.getPos().add(0, -1, 0));
+						&& (te.getSkullModel().contains("horse") 
+								|| te.getSkullModel().contains("donkey") 
+								|| te.getSkullModel().contains("mule"))) {
+					
+					IBlockState state1 = e.getPlacedAgainst();
 					IBlockState state2 = e.getWorld().getBlockState(e.getPos().add(0, -2, 0));
+					
 					if (Utils.containsOreDict(new ItemStack(state1.getBlock(), 1, state1.getBlock().getMetaFromState(state1)), "fenceWood")
 						&& Utils.containsOreDict(new ItemStack(state2.getBlock(), 1, state2.getBlock().getMetaFromState(state2)), "fenceWood")) {
-					
+						
 						HeadcrumbsNithingTE newTe = new HeadcrumbsNithingTE();
 						newTe.readFromNBT(te.writeToNBT(new NBTTagCompound()));
 						newTe.setOwner(e.getPlayer());
 						e.getWorld().setTileEntity(e.getPos(), newTe);
+						
 					}
 				}
 			}

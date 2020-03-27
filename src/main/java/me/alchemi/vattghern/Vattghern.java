@@ -46,9 +46,9 @@ public class Vattghern {
 	public void preInit(FMLPreInitializationEvent e) {
 		LOGGER = e.getModLog();
 		proxy.preInit(e);
-		if (Loader.isModLoaded("headcrumbs")) {
-			HeadcrumbsCompat.init();
-		}
+//		if (Loader.isModLoaded("headcrumbs")) {
+//			HeadcrumbsCompat.init();
+//		}
 	}
 	
 	@EventHandler
