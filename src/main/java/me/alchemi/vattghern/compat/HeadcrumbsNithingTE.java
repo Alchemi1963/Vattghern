@@ -1,4 +1,4 @@
-package me.alchemi.vattghern.objects.tileentities;
+package me.alchemi.vattghern.compat;
 
 import java.util.List;
 import java.util.Random;
@@ -6,8 +6,9 @@ import java.util.UUID;
 
 import com.google.common.base.Predicate;
 
-import me.alchemi.vattghern.Vattghern;
-import me.alchemi.vattghern.compat.HeadcrumbsNithingTE;
+import ganymedes01.headcrumbs.tileentities.TileEntityBlockSkull;
+import me.alchemi.vattghern.objects.tileentities.IMultiBlockProvider;
+import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
 import me.alchemi.vattghern.utils.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,17 +16,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
-public class TileEntityNithing extends TileEntity implements IMultiBlockProvider {
-	
+public class HeadcrumbsNithingTE extends TileEntityBlockSkull implements IMultiBlockProvider {
+
 	private UUID ownerUUID;
 	private String ownerName;
 	private String victim;
@@ -34,10 +35,6 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	private int ticks = 0;
 	
 	private boolean destroy = false;
-	
-	public TileEntityNithing() {
-		MinecraftForge.EVENT_BUS.register(TileEntityNithing.class);
-	}
 	
 	public void setOwner(EntityPlayer owner) {
 		this.ownerUUID = owner.getUniqueID();
@@ -153,17 +150,17 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	@SubscribeEvent
 	public static void onBlockBreak(LivingDestroyBlockEvent e) {
 		
-		if (e.getEntity().world.getTileEntity(e.getPos()) instanceof TileEntityNithing) {
+		if (e.getEntity().world.getTileEntity(e.getPos()) instanceof HeadcrumbsNithingTE) {
 			
-			TileEntityNithing te = (TileEntityNithing) e.getEntity().getEntityWorld().getTileEntity(e.getPos());
+			HeadcrumbsNithingTE te = Utils.getTileEntity(e.getEntity().world, e.getPos(), HeadcrumbsNithingTE.class);
 			if (!e.getEntity().getUniqueID().equals(te.getOwnerUUID())) {
 				e.setCanceled(true);
 			}
 		} else if (Utils.containsOreDict(
 				new ItemStack(e.getState().getBlock(), 1, e.getState().getBlock().getMetaFromState(e.getState())), "fenceWood")) {
-			TileEntityNithing te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 1, 0), TileEntityNithing.class);
+			HeadcrumbsNithingTE te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 1, 0), HeadcrumbsNithingTE.class);
 			if (te == null) {
-				te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 2, 0), TileEntityNithing.class);
+				te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 2, 0), HeadcrumbsNithingTE.class);
 				if (te != null) {
 					if (te.checkMultiBlockValid() && !e.getEntity().getUniqueID().equals(te.ownerUUID)) {
 						e.setCanceled(true);
@@ -175,19 +172,24 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	
 	@SubscribeEvent
 	public static void onPlayerBlockBreak(BlockEvent.BreakEvent e) {
-		if (e.getWorld().getTileEntity(e.getPos()) instanceof TileEntityNithing) {
+		if (e.getWorld().getTileEntity(e.getPos()) instanceof HeadcrumbsNithingTE) {
 			
-			TileEntityNithing te = Utils.getTileEntity(e.getWorld(), e.getPos(), TileEntityNithing.class);
-			if (!e.getPlayer().getUniqueID().equals(te.getOwnerUUID())) {
+			HeadcrumbsNithingTE te = (HeadcrumbsNithingTE) e.getWorld().getTileEntity(e.getPos());
+			if (te.ownerUUID != null 
+					&& !e.getPlayer().getUniqueID().equals(te.ownerUUID)
+					&& !e.getPlayer().isCreative()) {
 				e.setCanceled(true);
 			}
 		} else if (Utils.containsOreDict(
 				new ItemStack(e.getState().getBlock(), 1, e.getState().getBlock().getMetaFromState(e.getState())), "fenceWood")) {
-			TileEntityNithing te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 1, 0), TileEntityNithing.class);
+			HeadcrumbsNithingTE te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 1, 0), HeadcrumbsNithingTE.class);
 			if (te == null) {
-				te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 2, 0), TileEntityNithing.class);
+				te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 2, 0), HeadcrumbsNithingTE.class);
 				if (te != null) {
-					if (te.checkMultiBlockValid() && !e.getPlayer().getUniqueID().equals(te.ownerUUID)) {
+					if (te.checkMultiBlockValid() 
+							&& te.ownerUUID != null
+							&& !e.getPlayer().getUniqueID().equals(te.ownerUUID)
+							&& !e.getPlayer().isCreative()) {
 						e.setCanceled(true);
 					}
 				}
@@ -206,4 +208,5 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 		return Utils.containsOreDict(new ItemStack(state1.getBlock(), 1, state1.getBlock().getMetaFromState(state1)), "fenceWood")
 				&& Utils.containsOreDict(new ItemStack(state2.getBlock(), 1, state2.getBlock().getMetaFromState(state2)), "fenceWood");
 	}
+	
 }

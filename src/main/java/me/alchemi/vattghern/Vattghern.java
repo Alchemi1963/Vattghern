@@ -3,6 +3,7 @@ package me.alchemi.vattghern;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import me.alchemi.vattghern.compat.HeadcrumbsCompat;
 import me.alchemi.vattghern.proxies.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -45,6 +46,9 @@ public class Vattghern {
 	public void preInit(FMLPreInitializationEvent e) {
 		LOGGER = e.getModLog();
 		proxy.preInit(e);
+		if (Loader.isModLoaded("headcrumbs")) {
+			HeadcrumbsCompat.init();
+		}
 	}
 	
 	@EventHandler

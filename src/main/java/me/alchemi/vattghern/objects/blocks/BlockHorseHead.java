@@ -1,9 +1,9 @@
 package me.alchemi.vattghern.objects.blocks;
 
 import me.alchemi.vattghern.objects.EnumHorseType;
-import me.alchemi.vattghern.objects.Utils;
 import me.alchemi.vattghern.objects.blocks.base.BlockBasicMeta;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.utils.Utils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

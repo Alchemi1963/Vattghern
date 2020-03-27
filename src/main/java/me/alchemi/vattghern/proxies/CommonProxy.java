@@ -1,6 +1,7 @@
 package me.alchemi.vattghern.proxies;
 
 import me.alchemi.vattghern.Vattghern;
+import me.alchemi.vattghern.compat.HeadcrumbsNithingTE;
 import me.alchemi.vattghern.holders.BlockHolder;
 import me.alchemi.vattghern.holders.EntityHolder;
 import me.alchemi.vattghern.objects.blocks.BlockHorseHead;
@@ -30,8 +31,10 @@ public class CommonProxy {
 	public static void onBlockRegister(RegistryEvent.Register<Block> e) {
 		if (!Loader.isModLoaded("headcrumbs")) { 
 			e.getRegistry().register(new BlockHorseHead());
+			GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
+		} else {
+			GameRegistry.registerTileEntity(HeadcrumbsNithingTE.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
 		}
-		GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));	
 	}
 	
 	@SubscribeEvent
