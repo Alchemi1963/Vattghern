@@ -1,5 +1,8 @@
 package me.alchemi.vattghern.objects.blocks;
 
+import java.util.Arrays;
+
+import me.alchemi.vattghern.holders.BlockHolder;
 import me.alchemi.vattghern.objects.EnumHorseType;
 import me.alchemi.vattghern.objects.blocks.base.BlockBasicMeta;
 import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
@@ -13,8 +16,15 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.entity.passive.EntityDonkey;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityMule;
+import net.minecraft.entity.passive.EntitySkeletonHorse;
+import net.minecraft.entity.passive.EntityZombieHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -211,6 +221,56 @@ public class BlockHorseHead extends BlockBasicMeta {
 					? super.removedByPlayer(state, world, pos, player, willHarvest) : false;
 		}
 		return super.removedByPlayer(state, world, pos, player, willHarvest);
+	}
+	
+	public static ItemStack getHeadItem(EntityLivingBase entity) {
+		
+		if (!(entity instanceof AbstractHorse)) return ItemStack.EMPTY;
+		
+		int meta = 0;
+		
+		if (entity instanceof EntityHorse) {
+			NBTTagCompound nbt = entity.writeToNBT(new NBTTagCompound());
+			int variant = nbt.getInteger("Variant");
+			
+			if (Arrays.asList(0, 256, 512, 768, 1024).contains(variant)) {
+				//white	
+				meta = 8;
+			} else if (Arrays.asList(1, 257, 513, 769, 1025).contains(variant)) {
+				//creamy
+				meta = 4;
+			} else if (Arrays.asList(2, 258, 514, 770, 1026).contains(variant)) {
+				//chestnut
+				meta = 3;
+			} else if (Arrays.asList(3, 259, 515, 771, 1027).contains(variant)) {
+				//brown
+				meta = 2;
+			} else if (Arrays.asList(4, 260, 516, 772, 1028).contains(variant)) {
+				//black
+				meta = 1;
+			} else if (Arrays.asList(5, 261, 517, 773, 1029).contains(variant)) {
+				//gray
+				meta = 6;
+			} else if (Arrays.asList(6, 262, 518, 774, 1030).contains(variant)) {
+				//dark brown
+				meta = 5;
+			}
+			
+		} else if (entity instanceof EntitySkeletonHorse) {
+			meta = 7;
+		
+		} else if (entity instanceof EntityZombieHorse) {
+			meta = 9;
+		
+		} else if (entity instanceof EntityMule) {
+			meta = 10;
+		
+		} else if (entity instanceof EntityDonkey) {
+			meta = 0;
+		}
+		
+		return new ItemStack(BlockHolder.HORSE_HEAD, 1, meta);
+		
 	}
 	
 }

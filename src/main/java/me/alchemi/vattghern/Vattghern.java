@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import me.alchemi.vattghern.compat.HeadcrumbsCompat;
+import me.alchemi.vattghern.compat.TinkersCompat;
 import me.alchemi.vattghern.proxies.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -55,6 +56,10 @@ public class Vattghern {
 	public void init(FMLInitializationEvent e) {
 		LOGGER.log(Level.INFO, "Hello there!");
 		proxy.init(e);
+		
+		if (Loader.isModLoaded("tconstruct")) {
+			TinkersCompat.init();
+		}
 	}
 	
 	public void postInit(FMLPostInitializationEvent e) {
