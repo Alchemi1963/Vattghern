@@ -1,23 +1,30 @@
 package me.alchemi.vattghern;
 
+import java.util.Properties;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import me.alchemi.vattghern.common.crops.Crop;
+import me.alchemi.vattghern.common.crops.CropBeggartick;
+import me.alchemi.vattghern.common.crops.CropCelandine;
+import me.alchemi.vattghern.common.items.base.ItemBasic;
 import me.alchemi.vattghern.compat.HeadcrumbsCompat;
 import me.alchemi.vattghern.compat.TinkersCompat;
+import me.alchemi.vattghern.objects.ModCrops;
 import me.alchemi.vattghern.proxies.CommonProxy;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.LoaderState.ModState;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.SidedProxy;
 
 @Mod(modid = Vattghern.MOD_ID, name = Vattghern.NAME, version = Vattghern.VERSION, dependencies = "after:headcrumbs")
 public class Vattghern {
@@ -47,9 +54,10 @@ public class Vattghern {
 	public void preInit(FMLPreInitializationEvent e) {
 		LOGGER = e.getModLog();
 		proxy.preInit(e);
-//		if (Loader.isModLoaded("headcrumbs")) {
-//			HeadcrumbsCompat.init();
-//		}
+		
+		if (Loader.isModLoaded("headcrumbs")) {
+			HeadcrumbsCompat.init();
+		}
 	}
 	
 	@EventHandler

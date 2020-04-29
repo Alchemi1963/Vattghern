@@ -1,6 +1,6 @@
 package me.alchemi.vattghern.compat;
 
-import me.alchemi.vattghern.objects.blocks.BlockHorseHead;
+import me.alchemi.vattghern.common.blocks.BlockHorseHead;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.passive.EntityHorse;

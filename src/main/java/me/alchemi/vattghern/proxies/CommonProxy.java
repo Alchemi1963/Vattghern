@@ -1,21 +1,21 @@
 package me.alchemi.vattghern.proxies;
 
+import java.util.ArrayList;
+
 import me.alchemi.vattghern.Vattghern;
-import me.alchemi.vattghern.compat.HeadcrumbsNithingTE;
-import me.alchemi.vattghern.holders.BlockHolder;
-import me.alchemi.vattghern.holders.EntityHolder;
-import me.alchemi.vattghern.objects.blocks.BlockHorseHead;
-import me.alchemi.vattghern.objects.items.ItemCarvingKnife;
-import me.alchemi.vattghern.objects.items.ItemHorseHead;
-import me.alchemi.vattghern.objects.items.ItemMedallion;
-import me.alchemi.vattghern.objects.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.blocks.BlockHorseHead;
+import me.alchemi.vattghern.common.items.ItemCarvingKnife;
+import me.alchemi.vattghern.common.items.ItemHorseHead;
+import me.alchemi.vattghern.common.items.ItemMedallion;
+import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.objects.ModBlocks;
+import me.alchemi.vattghern.objects.ModCrops;
+import me.alchemi.vattghern.objects.ModEntities;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -31,6 +31,7 @@ public class CommonProxy {
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> e) {
 		e.getRegistry().registerAll(new BlockHorseHead());
+		e.getRegistry().registerAll(ModCrops.getCropBlocks());
 		GameRegistry.registerTileEntity(TileEntityNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
 		
 	}
@@ -42,15 +43,17 @@ public class CommonProxy {
 				new ItemHorseHead(),
 				new ItemCarvingKnife());
 		
+		e.getRegistry().registerAll(ModCrops.getCrops());
+		e.getRegistry().registerAll(ModCrops.getSeeds());
+		
 		for (int i = 0; i < 11; i++) {
-			OreDictionary.registerOre("headHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
-			OreDictionary.registerOre("skullHorse", new ItemStack(BlockHolder.HORSE_HEAD, 1, i));
+			OreDictionary.registerOre("headHorse", new ItemStack(ModBlocks.HORSE_HEAD, 1, i));
+			OreDictionary.registerOre("skullHorse", new ItemStack(ModBlocks.HORSE_HEAD, 1, i));
 		}
-
 	}
 	
 	public void preInit(FMLPreInitializationEvent e) {
-		EntityHolder.init();
+		ModEntities.init();
 	}
 	
 	public void init(FMLInitializationEvent e) {

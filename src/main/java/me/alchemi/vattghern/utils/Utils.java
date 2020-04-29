@@ -25,6 +25,10 @@ public class Utils {
 		return item;
 	}
 	
+	public static String capitalize(String str) {
+		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+	}
+	
 	public static AxisAlignedBB createAABB(double x1, double y1, double z1, double x2, double y2, double z2) {
 		return new AxisAlignedBB(x1* 0.0625D, y1 * 0.0625D, z1 * 0.0625D, x2 * 0.0625D, y2 * 0.0625D, z2 * 0.0625D);
 	}

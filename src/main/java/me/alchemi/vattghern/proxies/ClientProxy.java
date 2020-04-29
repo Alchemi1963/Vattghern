@@ -1,9 +1,10 @@
 package me.alchemi.vattghern.proxies;
 
 import me.alchemi.vattghern.Vattghern;
-import me.alchemi.vattghern.holders.BlockHolder;
-import me.alchemi.vattghern.holders.EntityHolder;
-import me.alchemi.vattghern.holders.ItemHolder;
+import me.alchemi.vattghern.objects.ModBlocks;
+import me.alchemi.vattghern.objects.ModCrops;
+import me.alchemi.vattghern.objects.ModEntities;
+import me.alchemi.vattghern.objects.ModItems;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -23,9 +24,10 @@ public class ClientProxy extends CommonProxy{
 	
 	@SubscribeEvent
 	public static void modelRegister(ModelRegistryEvent e) {
-		EntityHolder.registerModels();
-		BlockHolder.registerModels();
-		ItemHolder.registerModels();
+		ModEntities.registerModels();
+		ModBlocks.registerModels();
+		ModItems.registerModels();
+		ModCrops.registerModels();
 	}
 	
 }

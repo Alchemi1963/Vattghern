@@ -3,10 +3,10 @@ package me.alchemi.vattghern.eventhandlers;
 import java.util.Arrays;
 
 import me.alchemi.vattghern.Vattghern;
+import me.alchemi.vattghern.common.blocks.BlockHorseHead;
 import me.alchemi.vattghern.compat.TinkersCompat;
-import me.alchemi.vattghern.holders.BlockHolder;
-import me.alchemi.vattghern.holders.ItemHolder;
-import me.alchemi.vattghern.objects.blocks.BlockHorseHead;
+import me.alchemi.vattghern.objects.ModBlocks;
+import me.alchemi.vattghern.objects.ModItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
