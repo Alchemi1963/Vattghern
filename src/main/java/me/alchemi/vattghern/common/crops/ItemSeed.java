@@ -32,9 +32,6 @@ public class ItemSeed extends ItemSeeds {
 		this.cropBlock = cropBlock;
 		setRegistryName(Vattghern.MOD_ID, name);
 		setTranslationKey(name);
-
-		OreDictionary.registerOre("crop" + Utils.capitalize(name), this);
-		OreDictionary.registerOre("seed" + Utils.capitalize(name), this);
 	}
 	
 	public ItemSeed(String name, Block cropBlock) {

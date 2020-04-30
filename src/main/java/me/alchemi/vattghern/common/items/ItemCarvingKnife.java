@@ -2,7 +2,7 @@ package me.alchemi.vattghern.common.items;
 
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.items.base.ItemBasic;
-import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.tileentities.TileNithing;
 import me.alchemi.vattghern.objects.ModTabs;
 import me.alchemi.vattghern.proxies.GuiProxy;
 import me.alchemi.vattghern.utils.Utils;
@@ -27,7 +27,7 @@ public class ItemCarvingKnife extends ItemBasic {
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
-		TileEntityNithing tile = Utils.getTileEntity(worldIn, pos, TileEntityNithing.class);
+		TileNithing tile = Utils.getTileEntity(worldIn, pos, TileNithing.class);
 		
 		if (tile != null) {
 			player.openGui(Vattghern.MOD_ID, GuiProxy.GUIS.NITHING.getID(), worldIn, pos.getX(), pos.getY(), pos.getZ());

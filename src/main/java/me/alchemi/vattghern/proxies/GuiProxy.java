@@ -2,7 +2,7 @@ package me.alchemi.vattghern.proxies;
 
 import me.alchemi.vattghern.client.gui.NithingGui;
 import me.alchemi.vattghern.common.containers.NithingContainer;
-import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.tileentities.TileNithing;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +33,7 @@ public class GuiProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(pos);
 		switch(ID) {
 		case 0:
-			return new NithingContainer(player.inventory, (TileEntityNithing)te);
+			return new NithingContainer(player.inventory, (TileNithing)te);
 		}
 		return null;
 	}
@@ -44,7 +44,7 @@ public class GuiProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(pos);
 		switch(ID) {
 		case 0:
-			return new NithingGui((TileEntityNithing) te, new NithingContainer(player.inventory, (TileEntityNithing)te));
+			return new NithingGui((TileNithing) te, new NithingContainer(player.inventory, (TileNithing)te));
 		}
 		return null;
 	}

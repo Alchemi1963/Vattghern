@@ -6,6 +6,7 @@ import me.alchemi.vattghern.Config;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.items.base.ItemBasic;
 import me.alchemi.vattghern.objects.ModTabs;
+import me.alchemi.vattghern.utils.Utils;
 import me.alchemi.vattghern.objects.ModCrops;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -29,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public abstract class Crop extends BlockCrops{
 
@@ -46,6 +48,7 @@ public abstract class Crop extends BlockCrops{
 	protected final AxisAlignedBB[] crop_aabb;
 	protected final int maxAge;
 	protected boolean shearsEffective;
+	protected final String name;
 	
 	public Crop(String name, int maxAge, Block soilBlock, ItemBasic crop, AxisAlignedBB[] CROP_AABB) {
 		super();
@@ -55,6 +58,7 @@ public abstract class Crop extends BlockCrops{
 		this.maxAge = maxAge;
 		this.seed = new ItemSeed(name + "_seeds", this, soilBlock);
 		this.crop = crop;
+		this.name = name;
 		
 		this.seed.setCreativeTab(ModTabs.TAB_FARMING);
 		this.crop.setCreativeTab(ModTabs.TAB_FARMING);
@@ -64,6 +68,11 @@ public abstract class Crop extends BlockCrops{
 	
 	public Crop(String name, int maxAge, ItemBasic crop, AxisAlignedBB[] CROP_AABB) {
 		this(name, maxAge, Blocks.FARMLAND, crop, CROP_AABB);
+	}
+	
+	public void registerOre() {
+		OreDictionary.registerOre("crop" + Utils.capitalize(name), crop);
+		OreDictionary.registerOre("seed" + Utils.capitalize(name), seed);
 	}
 	
 	@Override

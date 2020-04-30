@@ -30,4 +30,13 @@ public class ModTabs {
 		}
 	};
 	
+	public static final CreativeTabs TAB_DECO = new CreativeTabs("tabDecoration") {
+		
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ModBlocks.HORSE_HEAD);
+		};
+		
+	};
+	
 }

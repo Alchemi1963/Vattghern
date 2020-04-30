@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = Vattghern.MOD_ID, name = Vattghern.NAME, version = Vattghern.VERSION, dependencies = "after:headcrumbs")
 public class Vattghern {

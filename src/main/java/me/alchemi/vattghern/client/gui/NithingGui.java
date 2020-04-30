@@ -6,7 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.containers.NithingContainer;
-import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.tileentities.TileNithing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
@@ -17,12 +17,12 @@ import net.minecraft.util.ResourceLocation;
 public class NithingGui extends GuiContainer {
 
 	private GuiTextField textField;
-	private final TileEntityNithing te;
+	private final TileNithing te;
 	private FontRenderer font;
 	
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(Vattghern.MOD_ID, "textures/gui/container/nithing.png");
 	
-	public NithingGui(TileEntityNithing te, NithingContainer container) {
+	public NithingGui(TileNithing te, NithingContainer container) {
 		super(container);
 		this.font = Minecraft.getMinecraft().fontRenderer;
 		this.te = te;

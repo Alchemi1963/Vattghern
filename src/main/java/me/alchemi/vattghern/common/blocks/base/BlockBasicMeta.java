@@ -30,7 +30,8 @@ public class BlockBasicMeta extends Block {
 	@SideOnly(Side.CLIENT)
 	public void initModel() {
 		for (int i = 0; i < subTypes; i++) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation(getRegistryName(), "inventory"+i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i
+					, new ModelResourceLocation(getRegistryName(), "inventory"+i));
 		}
 	}
 	

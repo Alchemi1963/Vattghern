@@ -1,6 +1,6 @@
 package me.alchemi.vattghern.common.containers;
 
-import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.tileentities.TileNithing;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -12,9 +12,9 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class NithingContainer extends Container{
 
-	private final TileEntityNithing te;
+	private final TileNithing te;
 	
-	public NithingContainer(IInventory playerInventory, TileEntityNithing te) {
+	public NithingContainer(IInventory playerInventory, TileNithing te) {
 		this.te = te;
 		
 		IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

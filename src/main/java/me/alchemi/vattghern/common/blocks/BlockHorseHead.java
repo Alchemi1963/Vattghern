@@ -3,7 +3,7 @@ package me.alchemi.vattghern.common.blocks;
 import java.util.Arrays;
 
 import me.alchemi.vattghern.common.blocks.base.BlockBasicMeta;
-import me.alchemi.vattghern.common.tileentities.TileEntityNithing;
+import me.alchemi.vattghern.common.tileentities.TileNithing;
 import me.alchemi.vattghern.objects.ModBlocks;
 import me.alchemi.vattghern.utils.EnumHorseType;
 import me.alchemi.vattghern.utils.Utils;
@@ -127,7 +127,7 @@ public class BlockHorseHead extends BlockBasicMeta {
 				state = state.withProperty(ISNITHING, true);
 				worldIn.setBlockState(pos, state);
 				
-				TileEntityNithing te = (TileEntityNithing) createTileEntity(worldIn, state);
+				TileNithing te = (TileNithing) createTileEntity(worldIn, state);
 				te.setOwner((EntityPlayer) placer);
 				worldIn.setTileEntity(pos, te);
 			}
@@ -202,7 +202,7 @@ public class BlockHorseHead extends BlockBasicMeta {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return state.getValue(ISNITHING) ? new TileEntityNithing() : null;
+		return state.getValue(ISNITHING) ? new TileNithing() : null;
 	}
 	
 	@Override
@@ -215,7 +215,7 @@ public class BlockHorseHead extends BlockBasicMeta {
 			boolean willHarvest) {
 		
 		if (state.getValue(ISNITHING)) {
-			TileEntityNithing te = (TileEntityNithing) world.getTileEntity(pos);
+			TileNithing te = (TileNithing) world.getTileEntity(pos);
 			
 			return (player.isCreative() || te.getOwnerUUID() == null || player.getUniqueID().equals(te.getOwnerUUID())) 
 					? super.removedByPlayer(state, world, pos, player, willHarvest) : false;

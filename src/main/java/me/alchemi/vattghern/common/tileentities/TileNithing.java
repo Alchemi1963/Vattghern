@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityNithing extends TileEntity implements IMultiBlockProvider {
+public class TileNithing extends TileEntity implements IMultiBlockProvider {
 	
 	private UUID ownerUUID;
 	private String ownerName;
@@ -41,8 +41,8 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	
 	private boolean destroy = false;
 	
-	public TileEntityNithing() {
-		MinecraftForge.EVENT_BUS.register(TileEntityNithing.class);
+	public TileNithing() {
+		MinecraftForge.EVENT_BUS.register(TileNithing.class);
 	}
 	
 	@Override
@@ -203,17 +203,17 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	@SubscribeEvent
 	public static void onBlockBreak(LivingDestroyBlockEvent e) {
 		
-		if (e.getEntity().world.getTileEntity(e.getPos()) instanceof TileEntityNithing) {
+		if (e.getEntity().world.getTileEntity(e.getPos()) instanceof TileNithing) {
 			
-			TileEntityNithing te = (TileEntityNithing) e.getEntity().getEntityWorld().getTileEntity(e.getPos());
+			TileNithing te = (TileNithing) e.getEntity().getEntityWorld().getTileEntity(e.getPos());
 			if (!e.getEntity().getUniqueID().equals(te.getOwnerUUID())) {
 				e.setCanceled(true);
 			}
 		} else if (Utils.containsOreDict(
 				new ItemStack(e.getState().getBlock(), 1, e.getState().getBlock().getMetaFromState(e.getState())), "fenceWood")) {
-			TileEntityNithing te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 1, 0), TileEntityNithing.class);
+			TileNithing te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 1, 0), TileNithing.class);
 			if (te == null) {
-				te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 2, 0), TileEntityNithing.class);
+				te = Utils.getTileEntity(e.getEntity().world, e.getPos().add(0, 2, 0), TileNithing.class);
 				if (te != null) {
 					if (te.checkMultiBlockValid() && !e.getEntity().getUniqueID().equals(te.ownerUUID)) {
 						e.setCanceled(true);
@@ -225,17 +225,17 @@ public class TileEntityNithing extends TileEntity implements IMultiBlockProvider
 	
 	@SubscribeEvent
 	public static void onPlayerBlockBreak(BlockEvent.BreakEvent e) {
-		if (e.getWorld().getTileEntity(e.getPos()) instanceof TileEntityNithing) {
+		if (e.getWorld().getTileEntity(e.getPos()) instanceof TileNithing) {
 			
-			TileEntityNithing te = Utils.getTileEntity(e.getWorld(), e.getPos(), TileEntityNithing.class);
+			TileNithing te = Utils.getTileEntity(e.getWorld(), e.getPos(), TileNithing.class);
 			if (!e.getPlayer().getUniqueID().equals(te.getOwnerUUID())) {
 				e.setCanceled(true);
 			}
 		} else if (Utils.containsOreDict(
 				new ItemStack(e.getState().getBlock(), 1, e.getState().getBlock().getMetaFromState(e.getState())), "fenceWood")) {
-			TileEntityNithing te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 1, 0), TileEntityNithing.class);
+			TileNithing te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 1, 0), TileNithing.class);
 			if (te == null) {
-				te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 2, 0), TileEntityNithing.class);
+				te = Utils.getTileEntity(e.getWorld(), e.getPos().add(0, 2, 0), TileNithing.class);
 				if (te != null) {
 					if (te.checkMultiBlockValid() && !e.getPlayer().getUniqueID().equals(te.ownerUUID)) {
 						e.setCanceled(true);

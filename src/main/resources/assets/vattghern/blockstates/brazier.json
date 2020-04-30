@@ -1,0 +1,30 @@
+{
+    "forge_marker": 1,
+    "defaults":{
+        "model": "vattghern:brazier/brazier"
+    },
+    "variants":{
+		"facing": {
+            "north": { "y": 0 },
+            "south": { "y": 180},
+            "east": { "y": 90},
+            "west": { "y": 270}
+        },
+        "lit": {
+            "true": {"submodel" : {
+				"fire": {"model": "vattghern:brazier/brazier_fire"}
+			}},
+            "false": {"model": "vattghern:brazier/brazier"}
+        },
+		"logs": {
+            "0": {"model": "vattghern:brazier/brazier"},
+            "1": {"model": "vattghern:brazier/brazier_1"},
+            "2": {"model": "vattghern:brazier/brazier_2"},
+            "3": {"model": "vattghern:brazier/brazier_3"},
+            "4": {"model": "vattghern:brazier/brazier_4"},
+            "5": {"model": "vattghern:brazier/brazier_5"},
+            "6": {"model": "vattghern:brazier/brazier_6"}
+        },
+		"inventory": [{}]
+    }
+}
