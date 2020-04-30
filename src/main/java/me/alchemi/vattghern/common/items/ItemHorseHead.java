@@ -13,32 +13,32 @@ public class ItemHorseHead extends ItemBlockBasicMeta {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		switch (stack.getMetadata()) {
 		case 0:
-			return super.getUnlocalizedName() + ".donkey";
+			return super.getTranslationKey() + ".donkey";
 		case 1:
-			return super.getUnlocalizedName() + ".horse_black";
+			return super.getTranslationKey() + ".horse_black";
 		case 2:
-			return super.getUnlocalizedName() + ".horse_brown";
+			return super.getTranslationKey() + ".horse_brown";
 		case 3:
-			return super.getUnlocalizedName() + ".horse_chestnut";
+			return super.getTranslationKey() + ".horse_chestnut";
 		case 4:
-			return super.getUnlocalizedName() + ".horse_creamy";
+			return super.getTranslationKey() + ".horse_creamy";
 		case 5:
-			return super.getUnlocalizedName() + ".horse_darkbrown";
+			return super.getTranslationKey() + ".horse_darkbrown";
 		case 6:
-			return super.getUnlocalizedName() + ".horse_gray";
+			return super.getTranslationKey() + ".horse_gray";
 		case 7:
-			return super.getUnlocalizedName() + ".horse_skeleton";
+			return super.getTranslationKey() + ".horse_skeleton";
 		case 8:
-			return super.getUnlocalizedName() + ".horse_white";
+			return super.getTranslationKey() + ".horse_white";
 		case 9:
-			return super.getUnlocalizedName() + ".horse_zombie";
+			return super.getTranslationKey() + ".horse_zombie";
 		case 10:
-			return super.getUnlocalizedName() + ".mule";
+			return super.getTranslationKey() + ".mule";
 		default:
-			return super.getUnlocalizedName() + ".horse_zombie";
+			return super.getTranslationKey() + ".horse_zombie";
 		}
 	}
 	

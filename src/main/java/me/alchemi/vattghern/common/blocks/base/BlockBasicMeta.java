@@ -19,7 +19,7 @@ public class BlockBasicMeta extends Block {
 	public BlockBasicMeta(Material material, String name, int subTypes) {
 		super(material);
 		setRegistryName(Vattghern.MOD_ID, name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.subTypes = subTypes;
 	}
 	

@@ -8,6 +8,7 @@ import me.alchemi.vattghern.common.crops.Crop;
 import me.alchemi.vattghern.common.crops.CropBeggartick;
 import me.alchemi.vattghern.common.crops.CropCelandine;
 import me.alchemi.vattghern.common.crops.ItemSeed;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.item.Item;
 
 public class ModCrops {
@@ -44,6 +45,7 @@ public class ModCrops {
 		if (!registry.contains(crop)) {
 			registry.add(crop);
 		}
+		
 	}
 	
 	public static ItemSeed[] getSeeds() {

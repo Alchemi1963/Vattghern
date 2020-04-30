@@ -11,7 +11,7 @@ public class ItemBasic extends Item {
 	public ItemBasic(String name) {
 		super();
 		setRegistryName(Vattghern.MOD_ID, name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 	}
 	
 	public void initModel() {

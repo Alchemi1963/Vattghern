@@ -50,7 +50,7 @@ public abstract class Crop extends BlockCrops{
 	public Crop(String name, int maxAge, Block soilBlock, ItemBasic crop, AxisAlignedBB[] CROP_AABB) {
 		super();
 		setRegistryName(Vattghern.MOD_ID, "crop_" + name);
-		setUnlocalizedName("crop_" + name);
+		setTranslationKey("crop_" + name);
 		this.crop_aabb = CROP_AABB;
 		this.maxAge = maxAge;
 		this.seed = new ItemSeed(name + "_seeds", this, soilBlock);

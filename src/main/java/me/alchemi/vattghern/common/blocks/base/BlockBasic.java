@@ -15,7 +15,7 @@ public class BlockBasic extends Block{
 	public BlockBasic(Material material, String name) {
 		super(material);
 		setRegistryName(Vattghern.MOD_ID, name);
-		setUnlocalizedName(Vattghern.MOD_ID + "." + name);
+		setTranslationKey(Vattghern.MOD_ID + "." + name);
 	}
 	
 	@SideOnly(Side.CLIENT)

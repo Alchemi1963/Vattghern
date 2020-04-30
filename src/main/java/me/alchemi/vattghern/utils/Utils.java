@@ -21,7 +21,7 @@ public class Utils {
 	
 	public static Item setup(Item item, String registryName) {
 		item = item.setRegistryName(Vattghern.MOD_ID, registryName);
-		item = item.setUnlocalizedName(Vattghern.MOD_ID + "." + registryName);
+		item = item.setTranslationKey(Vattghern.MOD_ID + "." + registryName);
 		return item;
 	}
 	

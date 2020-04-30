@@ -31,7 +31,7 @@ public class ItemSeed extends ItemSeeds {
 		this.soilBlock = soilBlock;
 		this.cropBlock = cropBlock;
 		setRegistryName(Vattghern.MOD_ID, name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		OreDictionary.registerOre("crop" + Utils.capitalize(name), this);
 		OreDictionary.registerOre("seed" + Utils.capitalize(name), this);
