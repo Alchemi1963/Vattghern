@@ -5,9 +5,9 @@ import java.util.Random;
 import me.alchemi.vattghern.Config;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.items.base.ItemBasic;
+import me.alchemi.vattghern.objects.ModCrops;
 import me.alchemi.vattghern.objects.ModTabs;
 import me.alchemi.vattghern.utils.Utils;
-import me.alchemi.vattghern.objects.ModCrops;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.properties.PropertyInteger;
@@ -49,6 +49,7 @@ public abstract class Crop extends BlockCrops{
 	protected final int maxAge;
 	protected boolean shearsEffective;
 	protected final String name;
+	protected int preBlossomStage = -1;
 	
 	public Crop(String name, int maxAge, Block soilBlock, ItemBasic crop, AxisAlignedBB[] CROP_AABB) {
 		super();
@@ -132,6 +133,10 @@ public abstract class Crop extends BlockCrops{
 		return maxAge;
 	}
 	
+	public void setPreBlossomStage(int preBlossomStage) {
+		this.preBlossomStage = preBlossomStage;
+	}
+	
 	@Override
 	protected Item getSeed() {
 		return seed;
@@ -176,6 +181,7 @@ public abstract class Crop extends BlockCrops{
 	
 	@SideOnly(Side.CLIENT)
 	public void initModel() {
+		if (preBlossomStage == -1) preBlossomStage = maxAge - 1;
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 

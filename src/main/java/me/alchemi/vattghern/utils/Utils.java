@@ -37,14 +37,29 @@ public class Utils {
 		return containsOreDict(new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)), oredict);
 	}
 	
+	public static boolean containsOreDict(IBlockState state, String oredict, boolean strict) {
+		return containsOreDict(new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)), oredict, strict);
+	}
+	
 	public static boolean containsOreDict(ItemStack item, String oredict) {
-		return OreDictionary.doesOreNameExist(oredict) && OreDictionary.containsMatch(false, OreDictionary.getOres(oredict, false), item);
+		return containsOreDict(item, oredict, false);
+	}
+	
+	public static boolean containsOreDict(ItemStack item, String oredict, boolean strict) {
+		if (!OreDictionary.doesOreNameExist(oredict)) return false;
+		
+		for (ItemStack stack : OreDictionary.getOres(oredict)) {
+			if (stack.getItem() == item.getItem() && (!strict || item.getMetadata() == stack.getMetadata())) return true;
+		}
+		
+		return OreDictionary.containsMatch(strict, OreDictionary.getOres(oredict), item);
 	}
 	
 	public static void sendMessageToPlayer(EntityPlayer player, String message) {
 		if (!player.world.isRemote) player.sendMessage(new TextComponentTranslation(message));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static final <T> T getTileEntity(IBlockAccess world, BlockPos pos, Class<T> cls){
 		TileEntity te = world.getTileEntity(pos);
 		if (cls.isInstance(te)) {

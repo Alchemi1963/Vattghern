@@ -47,8 +47,8 @@ public class EntityLeshen extends EntityMob {
 		tasks.addTask(8, new EntityAILookIdle(this));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[] {EntityBat.class, EntityWolf.class}));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, false));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
 	}
 	
 	@Override

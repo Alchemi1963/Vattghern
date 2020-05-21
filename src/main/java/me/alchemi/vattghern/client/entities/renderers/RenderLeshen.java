@@ -3,7 +3,6 @@ package me.alchemi.vattghern.client.entities.renderers;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.client.entities.models.ModelLeshen;
 import me.alchemi.vattghern.common.entities.EntityLeshen;
-import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

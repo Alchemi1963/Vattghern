@@ -1,6 +1,5 @@
 package me.alchemi.vattghern.utils;
 
-import akka.japi.Function;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;

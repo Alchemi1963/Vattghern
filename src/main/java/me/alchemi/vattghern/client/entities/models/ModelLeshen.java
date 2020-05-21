@@ -1,8 +1,5 @@
 package me.alchemi.vattghern.client.entities.models;
 
-import org.apache.logging.log4j.Level;
-
-import me.alchemi.vattghern.Vattghern;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;

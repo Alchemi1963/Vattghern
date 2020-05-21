@@ -1,12 +1,8 @@
 package me.alchemi.vattghern.eventhandlers;
 
-import java.util.Arrays;
-
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.blocks.BlockHorseHead;
 import me.alchemi.vattghern.compat.TinkersCompat;
-import me.alchemi.vattghern.objects.ModBlocks;
-import me.alchemi.vattghern.objects.ModItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +13,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.TConstruct;
 
 @EventBusSubscriber(modid = Vattghern.MOD_ID)
 public class LootTableHandler {

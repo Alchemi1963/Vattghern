@@ -1,18 +1,13 @@
 package me.alchemi.vattghern.compat;
 
-import java.util.Arrays;
-
 import ganymedes01.headcrumbs.utils.helpers.VanillaHelper;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.objects.ModBlocks;
 import me.alchemi.vattghern.utils.EnumHorseType;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import scala.annotation.meta.param;
 
 public class HeadcrumbsCompat implements ICompat {
 

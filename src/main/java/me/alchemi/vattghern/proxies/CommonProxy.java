@@ -3,19 +3,17 @@ package me.alchemi.vattghern.proxies;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.blocks.BlockBrazier;
 import me.alchemi.vattghern.common.blocks.BlockHorseHead;
+import me.alchemi.vattghern.common.items.ItemBrazier;
 import me.alchemi.vattghern.common.items.ItemCarvingKnife;
 import me.alchemi.vattghern.common.items.ItemHorseHead;
 import me.alchemi.vattghern.common.items.ItemMedallion;
-import me.alchemi.vattghern.common.items.base.ItemBlockBasic;
 import me.alchemi.vattghern.common.tileentities.TileBrazier;
 import me.alchemi.vattghern.common.tileentities.TileNithing;
 import me.alchemi.vattghern.objects.ModBlocks;
 import me.alchemi.vattghern.objects.ModCrops;
 import me.alchemi.vattghern.objects.ModEntities;
-import me.alchemi.vattghern.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -33,9 +31,10 @@ public class CommonProxy {
 
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> e) {
-		e.getRegistry().registerAll(new BlockBrazier(), new BlockHorseHead());
 		
+		e.getRegistry().registerAll(new BlockBrazier(), new BlockHorseHead());
 		e.getRegistry().registerAll(ModCrops.getCropBlocks());
+		
 		GameRegistry.registerTileEntity(TileNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));
 		GameRegistry.registerTileEntity(TileBrazier.class, new ResourceLocation(Vattghern.MOD_ID, "brazier"));
 		
@@ -47,7 +46,7 @@ public class CommonProxy {
 				new ItemMedallion(),
 				new ItemHorseHead(),
 				new ItemCarvingKnife(),
-				new ItemBlockBasic(ModBlocks.BRAZIER, "brazier"));
+				new ItemBrazier());
 		
 		e.getRegistry().registerAll(ModCrops.getCrops());
 		e.getRegistry().registerAll(ModCrops.getSeeds());

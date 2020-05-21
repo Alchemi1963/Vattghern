@@ -1,6 +1,124 @@
+##MESSAGES
+nithing.setvictim.name=§cCarve in the victims name using a carving knife.
+#
+
+##CROPS
+tile.crop_beggartick.name=Beggartick
+item.beggartick.name=Beggartick
+item.beggartick_seeds.name=Beggartick Seeds
+
+tile.crop_arenaria.name=Arenaria
+item.arenaria.name=Arenaria
+item.arenaria_seeds.name=Arenaria Seeds
+
+tile.crop_balisse.name=Balisse
+item.balisse.name=Balisse
+item.balisse_seeds.name=Balisse Seeds
+
+tile.crop_berbercane.name=Berbercane
+item.berbercane.name=Berbercane
+item.berbercane_seeds.name=Berbercane Seeds
+
+tile.crop_bison_grass.name=Bison_grass
+item.bison_grass.name=Bison_grass
+item.bison_grass_seeds.name=Bison_grass Seeds
+
+tile.crop_bryonia.name=Bryonia
+item.bryonia.name=Bryonia
+item.bryonia_seeds.name=Bryonia Seeds
+
+tile.crop_buckthorn.name=Buckthorn
+item.buckthorn.name=Buckthorn
+item.buckthorn_seeds.name=Buckthorn Seeds
+
+tile.crop_crows_eye.name=Crows Eye
+item.crows_eye.name=Crows Eye
+item.crows_eye_seeds.name=Crows_eye Seeds
+
+tile.crop_fools_parsley.name=Fools Parsley
+item.fools_parsley.name=Fools Parsley
+item.fools_parsley_seeds.name=Fools Parsley Seeds
+
+tile.crop_ginatia.name=Ginatia
+item.ginatia.name=Ginatia
+item.ginatia_seeds.name=Ginatia Seeds
+
+tile.crop_han.name=Han
+item.han.name=Han
+item.han_seeds.name=Han Seeds
+
+tile.crop_hellebore.name=Hellebore
+item.hellebore.name=Hellebore
+item.hellebore_seeds.name=Hellebore Seeds
+
+tile.crop_honeysuckle.name=Honeysuckle
+item.honeysuckle.name=Honeysuckle
+item.honeysuckle_seeds.name=Honeysuckle Seeds
+
+tile.crop_hop.name=Hop
+item.hop.name=Hop
+item.hop_seeds.name=Hop Seeds
+
+tile.crop_hornwort.name=Hornwort
+item.hornwort.name=Hornwort
+item.hornwort_seeds.name=Hornwort Seeds
+
+tile.crop_mistletoe.name=Mistletoe
+item.mistletoe.name=Mistletoe
+item.mistletoe_seeds.name=Mistletoe Seeds
+
+tile.crop_moleyarrow.name=Moleyarrow
+item.moleyarrow.name=Moleyarrow
+item.moleyarrow_seeds.name=Moleyarrow Seeds
+
+tile.crop_nostric.name=Nostric
+item.nostric.name=Nostric
+item.nostric_seeds.name=Nostric Seeds
+
+tile.crop_pringrape.name=Pringrape
+item.pringrape.name=Pringrape
+item.pringrape_seeds.name=Pringrape Seeds
+
+tile.crop_ranogrin.name=Ranogrin
+item.ranogrin.name=Ranogrin
+item.ranogrin_seeds.name=Ranogrin Seeds
+
+tile.crop_ribleaf.name=Ribleaf
+item.ribleaf.name=Ribleaf
+item.ribleaf_seeds.name=Ribleaf Seeds
+
+tile.crop_verbena.name=Verbena
+item.verbena.name=Verbena
+item.verbena_seeds.name=Verbena Seeds
+
+tile.crop_white_myrtle.name=White Myrtle
+item.white_myrtle.name=White Myrtle
+item.white_myrtle_seeds.name=White Myrtle Seeds
+
+tile.crop_wolfsbane.name=Wolfsbane
+item.wolfsbane.name=Wolfsbane
+item.wolfsbane_seeds.name=Wolfsbane Seeds
+#
+
+##DECO
+tile.brazier.name=Brazier
+tile.brazier.eternal.name=The Eternal Fire
+tile.brazier.eternal.lore=§5§oCreative Only
+#
+
+##TOOLS
+item.carving_knife.name=Carving Knife
 item.medallion.name=Witcher's Medallion
+#
+
+##BLOCKS
+#
+
+##TILE ENTITIES
 tile.nithing.name=Nithing
-entity.Leshen.name=Leshen
+#
+
+##MOB DROPS
 tile.horse_head.donkey.name=Donkey Head
 tile.horse_head.horse_black.name=Black Horse Head
 tile.horse_head.horse_brown.name=Brown Horse Head
@@ -12,5 +130,8 @@ tile.horse_head.horse_skeleton.name=Skeleton Horse Skull
 tile.horse_head.horse_white.name=White Horse Head
 tile.horse_head.horse_zombie.name=Zombie Horse Head
 tile.horse_head.mule.name=Mule Head
-nithing.setvictim.name=§cCarve in the victims name using a carving knife.
-item.carving_knife.name=Carving Knife
+#
+
+##ENTITIES
+entity.Leshen.name=Leshen
+#

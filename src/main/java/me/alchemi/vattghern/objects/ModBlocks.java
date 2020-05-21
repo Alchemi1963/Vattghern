@@ -3,7 +3,6 @@ package me.alchemi.vattghern.objects;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.blocks.BlockBrazier;
 import me.alchemi.vattghern.common.blocks.BlockHorseHead;
-import me.alchemi.vattghern.common.crops.Crop;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(value = Vattghern.MOD_ID)

@@ -1,30 +1,41 @@
 {
-    "forge_marker": 1,
-    "defaults":{
-        "model": "vattghern:brazier/brazier"
-    },
-    "variants":{
+	"forge_marker": 1,
+	"defaults":{
+		"model": "vattghern:brazier_models/brazier",
+		"textures": {
+			"0": "blocks/anvil_base",
+			"1": "blocks/log_spruce",
+			"2": "blocks/log_spruce_top",
+			"particle": "blocks/anvil_base"
+		}
+	},
+	"variants":{
 		"facing": {
-            "north": { "y": 0 },
-            "south": { "y": 180},
-            "east": { "y": 90},
-            "west": { "y": 270}
-        },
-        "lit": {
-            "true": {"submodel" : {
-				"fire": {"model": "vattghern:brazier/brazier_fire"}
+			"north": { "y": 0 },
+			"south": { "y": 180},
+			"east": { "y": 90},
+			"west": { "y": 270}
+		},
+		"lit": {
+			"true": {"submodel" : {
+				"fire": {"model": "vattghern:brazier_models/brazier_fire"}
 			}},
-            "false": {"model": "vattghern:brazier/brazier"}
-        },
+			"false": {}
+		},
 		"logs": {
-            "0": {"model": "vattghern:brazier/brazier"},
-            "1": {"model": "vattghern:brazier/brazier_1"},
-            "2": {"model": "vattghern:brazier/brazier_2"},
-            "3": {"model": "vattghern:brazier/brazier_3"},
-            "4": {"model": "vattghern:brazier/brazier_4"},
-            "5": {"model": "vattghern:brazier/brazier_5"},
-            "6": {"model": "vattghern:brazier/brazier_6"}
-        },
-		"inventory": [{}]
-    }
+			"0": {"model": "vattghern:brazier_models/brazier"},
+			"1": {"model": "vattghern:brazier_models/brazier_1"},
+			"2": {"model": "vattghern:brazier_models/brazier_2"},
+			"3": {"model": "vattghern:brazier_models/brazier_3"},
+			"4": {"model": "vattghern:brazier_models/brazier_4"},
+			"5": {"model": "vattghern:brazier_models/brazier_5"},
+			"6": {"model": "vattghern:brazier_models/brazier_6"}
+		},
+		"eternal": {
+			"true": {"model": "vattghern:brazier_models/brazier_6"},
+			"false": {}
+		},
+		"inventory": [{}],
+		"inventory_eternal": [{"model": "vattghern:brazier_models/brazier_6"}]
+	}
 }

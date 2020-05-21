@@ -1,12 +1,10 @@
 package me.alchemi.vattghern.proxies;
 
-import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.objects.ModBlocks;
 import me.alchemi.vattghern.objects.ModCrops;
 import me.alchemi.vattghern.objects.ModEntities;
 import me.alchemi.vattghern.objects.ModItems;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

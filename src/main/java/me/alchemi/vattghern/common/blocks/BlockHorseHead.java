@@ -5,6 +5,7 @@ import java.util.Arrays;
 import me.alchemi.vattghern.common.blocks.base.BlockBasicMeta;
 import me.alchemi.vattghern.common.tileentities.TileNithing;
 import me.alchemi.vattghern.objects.ModBlocks;
+import me.alchemi.vattghern.objects.ModTabs;
 import me.alchemi.vattghern.utils.EnumHorseType;
 import me.alchemi.vattghern.utils.Utils;
 import net.minecraft.block.SoundType;
@@ -54,6 +55,7 @@ public class BlockHorseHead extends BlockBasicMeta {
 				.withProperty(ISNITHING, false));
 		setHardness(0.5F);
 		setSoundType(SoundType.STONE);
+		setCreativeTab(ModTabs.TAB_MOBDROPS);
 	}
 	
 	@Override
