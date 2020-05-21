@@ -11,6 +11,7 @@ public class CropCelandine extends Crop{
 	public CropCelandine() {
 		super("celandine", 7, Blocks.GRASS, new ItemBasic("celandine"), Crop.DEFAULT_CROP_AABB);
 		setShearsEffective(true);
+		setPreBlossomStage(4);
 	}
 
 	@Override

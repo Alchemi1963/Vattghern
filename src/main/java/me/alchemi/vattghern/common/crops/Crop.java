@@ -83,7 +83,7 @@ public abstract class Crop extends BlockCrops{
 		if (state.getValue(getAgeProperty()).intValue() == maxAge
 				&& shearsEffective && playerIn.getHeldItem(hand).getItem() instanceof ItemShears
 				&& !worldIn.isRemote && !playerIn.isCreative()) {
-			worldIn.setBlockState(pos, state.withProperty(getAgeProperty(), maxAge - 1));
+			worldIn.setBlockState(pos, state.withProperty(getAgeProperty(), preBlossomStage));
 			
 			ItemStack shears = playerIn.getHeldItem(hand);
 			shears.damageItem(1, playerIn);

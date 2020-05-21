@@ -10,6 +10,7 @@ public class CropBalisse extends Crop {
 	
 	public CropBalisse() {
 		super("balisse", 7, Blocks.GRASS, new ItemBasic("balisse"), Crop.DEFAULT_CROP_AABB);
+		setPreBlossomStage(4);
 	}
 
 	@Override
