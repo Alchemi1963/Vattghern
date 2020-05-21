@@ -49,7 +49,7 @@ minecraft {
 	
 	runDir = "run"
 	
-	runClientArgs += "--username=Vattghern"
+	clientRunArgs += "--username=Vattghern"
 }
 
 repositories {
