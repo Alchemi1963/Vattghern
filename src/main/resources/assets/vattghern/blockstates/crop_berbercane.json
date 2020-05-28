@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+	"defaults":{
+		"model": "cross",
+		"textures": {"cross": "vattghern:block/berbercane_stage_3"}
+	},
+	"variants":{
+		"age":{
+			"0": {"textures": {"cross": "vattghern:block/berbercane_stage_0"}},
+			"1": {"textures": {"cross": "vattghern:block/berbercane_stage_1"}},
+			"2": {"textures": {"cross": "vattghern:block/berbercane_stage_2"}},
+			"3": {"textures": {"cross": "vattghern:block/berbercane_stage_3"}}
+		}
+	}
+}

@@ -3,6 +3,7 @@ package me.alchemi.vattghern.proxies;
 import me.alchemi.vattghern.Vattghern;
 import me.alchemi.vattghern.common.blocks.BlockBrazier;
 import me.alchemi.vattghern.common.blocks.BlockHorseHead;
+import me.alchemi.vattghern.common.blocks.ghosts.CropBryoniaTop;
 import me.alchemi.vattghern.common.items.ItemBrazier;
 import me.alchemi.vattghern.common.items.ItemCarvingKnife;
 import me.alchemi.vattghern.common.items.ItemHorseHead;
@@ -32,7 +33,7 @@ public class CommonProxy {
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> e) {
 		
-		e.getRegistry().registerAll(new BlockBrazier(), new BlockHorseHead());
+		e.getRegistry().registerAll(new BlockBrazier(), new BlockHorseHead(), new CropBryoniaTop());
 		e.getRegistry().registerAll(ModCrops.getCropBlocks());
 		
 		GameRegistry.registerTileEntity(TileNithing.class, new ResourceLocation(Vattghern.MOD_ID, "nithing"));

@@ -5,13 +5,15 @@ import net.minecraft.block.properties.PropertyInteger;
 
 public class CropBisonGrass extends Crop {
 
+	private static final PropertyInteger CROP_AGE = PropertyInteger.create("age", 0, 7);
+	
 	public CropBisonGrass() {
-		super("arenaria", 4, new ItemBasic("arenaria"), Crop.DEFAULT_CROP_AABB);
+		super("bison_grass", 7, new ItemBasic("bison_grass"), Crop.DEFAULT_CROP_AABB);
 	}
 
 	@Override
 	protected PropertyInteger getAgeProperty() {
-		return null;
+		return CROP_AGE;
 	}
 
 }

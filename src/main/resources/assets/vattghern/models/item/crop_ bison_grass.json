@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vattghern:block/ bison_grass_stage_7"
+    }
+}

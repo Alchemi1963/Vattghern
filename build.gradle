@@ -116,5 +116,40 @@ processResources {
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar') 
 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
+task incrementVersion {
+	doFirst{
+		File propFile = file("$rootDir/gradle.properties")
+		
+		String version = (propFile.getText() =~ /((?<!.)version=.+)/)[0][0].replace("version=", "")
+		
+		String minor=version.substring(version.lastIndexOf('.')+1)
+		int m=minor.toInteger()+1
+		
+		String major=version.substring(0, version.lastIndexOf('.')+1)
+		
+		String s=propFile.getText().replaceFirst('version=' + version,'version='+major+m)
+		propFile.setText(s)
+
+		project.logger.lifecycle 'New version ' + major + m
+	}
+}
+
+task export(type: Copy){
+	dependsOn 'jar'
+	finalizedBy 'incrementVersion'
+	
+	group = 'Build'
+	description = 'Export project to target folder.'
+	
+	from jar.archivePath
+	into 'exports'
+	
+	doFirst{
+		project.logger.lifecycle 'Exporting to jar file.'
+		
+		File dir = new File('exports')
+		if (!dir.exists()){
+			dir.mkdirs()
+		}
+	}
+}

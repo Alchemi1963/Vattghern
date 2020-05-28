@@ -1,0 +1,23 @@
+{
+    "forge_marker": 1,
+	"defaults":{
+		"model": "cross",
+		"textures": {"cross": "vattghern:block/bryonia_stage_11"}
+	},
+	"variants":{
+		"age":{
+			"0": {"textures": {"cross": "vattghern:block/bryonia_stage_0"}},
+			"1": {"textures": {"cross": "vattghern:block/bryonia_stage_1"}},
+			"2": {"textures": {"cross": "vattghern:block/bryonia_stage_2"}},
+			"3": {"textures": {"cross": "vattghern:block/bryonia_stage_3"}},
+			"4": {"textures": {"cross": "vattghern:block/bryonia_stage_4"}},
+			"5": {"textures": {"cross": "vattghern:block/bryonia_stage_5"}},
+			"6": {"textures": {"cross": "vattghern:block/bryonia_stage_6"}},
+			"7": {"textures": {"cross": "vattghern:block/bryonia_stage_7"}},
+			"8": {"textures": {"cross": "vattghern:block/bryonia_stage_8"}},
+			"9": {"textures": {"cross": "vattghern:block/bryonia_stage_9"}},
+			"10": {"textures": {"cross": "vattghern:block/bryonia_stage_10"}},
+			"11": {"textures": {"cross": "vattghern:block/bryonia_stage_11"}}
+		}
+	}
+}

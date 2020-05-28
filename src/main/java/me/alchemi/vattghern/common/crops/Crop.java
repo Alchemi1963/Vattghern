@@ -22,6 +22,7 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -44,12 +45,13 @@ public abstract class Crop extends BlockCrops{
 			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 	
 	protected final ItemSeed seed;
-	protected final ItemBasic crop;
+	protected ItemBasic crop;
 	protected final AxisAlignedBB[] crop_aabb;
 	protected final int maxAge;
 	protected boolean shearsEffective;
 	protected final String name;
 	protected int preBlossomStage = -1;
+	protected int multiplier = 1;
 	
 	public Crop(String name, int maxAge, Block soilBlock, ItemBasic crop, AxisAlignedBB[] CROP_AABB) {
 		super();
@@ -62,7 +64,7 @@ public abstract class Crop extends BlockCrops{
 		this.name = name;
 		
 		this.seed.setCreativeTab(ModTabs.TAB_FARMING);
-		this.crop.setCreativeTab(ModTabs.TAB_FARMING);
+		if (crop != null) this.crop.setCreativeTab(ModTabs.TAB_FARMING);
 		
 		ModCrops.register(this);
 	}
@@ -72,7 +74,7 @@ public abstract class Crop extends BlockCrops{
 	}
 	
 	public void registerOre() {
-		OreDictionary.registerOre("crop" + Utils.capitalize(name), crop);
+		if (crop != null) OreDictionary.registerOre("crop" + Utils.capitalize(name), crop);
 		OreDictionary.registerOre("seed" + Utils.capitalize(name), seed);
 	}
 	
@@ -89,10 +91,10 @@ public abstract class Crop extends BlockCrops{
 			shears.damageItem(1, playerIn);
 			playerIn.setHeldItem(hand, shears);
 			
-			int amount = 1;
+			int amount = 1 * getMultiplier();
 			if (worldIn.rand.nextInt(100) <= Config.extraCropChance) amount ++; 
 			
-			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(crop, amount)));
+			if (crop != null) worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(crop, amount)));
 			if (worldIn.rand.nextInt(100) <= Config.seedDropChance) worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(seed)));
 			
 			return true;
@@ -101,12 +103,35 @@ public abstract class Crop extends BlockCrops{
 		return false;
 	}
 	
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state,
+			int fortune) {
+		super.getDrops(drops, world, pos, state, fortune);
+		for (ItemStack stack : drops) {
+			if (stack == null || stack.isEmpty()) continue;
+			
+			else if (stack.getItem() == crop || (crop == null && stack.getItem() == seed)) {
+				int index = drops.indexOf(stack);
+				stack.setCount(stack.getCount() * getMultiplier());
+				drops.set(index, stack);
+			}
+		}
+	}
+	
 	public void setShearsEffective(boolean shearsEffective) {
 		this.shearsEffective = shearsEffective;
 	}
 	
 	public boolean areShearsEffective() {
 		return shearsEffective;
+	}
+	
+	public void setMultiplier(int multiplier) {
+		this.multiplier = multiplier;
+	}
+	
+	public int getMultiplier() {
+		return multiplier;
 	}
 	
 	@Override
@@ -153,6 +178,10 @@ public abstract class Crop extends BlockCrops{
 	
 	public ItemBasic getCrops() {
 		return crop;
+	}
+	
+	public boolean hasCrops() {
+		return crop != null;
 	}
 	
 	@Override

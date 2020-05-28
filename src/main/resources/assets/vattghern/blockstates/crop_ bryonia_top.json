@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+	"defaults":{
+		"model": "cross",
+		"textures": {"cross": "vattghern:block/bryonia_stage_11_top"}
+	},
+	"variants":{
+		"age":{
+			"6": {"textures": {"cross": "vattghern:block/bryonia_stage_6_top"}},
+			"7": {"textures": {"cross": "vattghern:block/bryonia_stage_7_top"}},
+			"8": {"textures": {"cross": "vattghern:block/bryonia_stage_8_top"}},
+			"9": {"textures": {"cross": "vattghern:block/bryonia_stage_9_top"}},
+			"10": {"textures": {"cross": "vattghern:block/bryonia_stage_10_top"}},
+			"11": {"textures": {"cross": "vattghern:block/bryonia_stage_11_top"}}
+		}
+	}
+}
